@@ -1,55 +1,135 @@
-*{
-    margin: 0;
+* {
     padding: 0;
-    font-family: sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
-.banner{
+
+.banner {
+    background-image: linear-gradient(rgb(110, 2, 110), rgb(185, 23, 123), rgb(64, 64, 240));
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(fondo.webp);
     background-size: cover;
     background-position: center;
 }
 
+img {
+    width: 100%;
+}
+
 .navbar {
-    width: 85%;
-    margin: auto;
-    padding: 35px 0;
+    width: 80%;
+    height: 70px;
+    background: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 40px;
+    border-radius: 0 0 10px 10px;
+    margin: 0 auto;
 }
 
-.logo {
-    width: 120 px;
-    cursor: pointer;
+.navbar .logo {
+    width: 55px;
+    margin-top: 5.5px;
+}
+
+
+.navbar ul {
+    display: flex;
 }
 
 .navbar ul li {
     list-style: none;
-    display: inline-block;
-    margin: 0 20px;
-    position: relative;
-} 
+}
 
 .navbar ul li a{
     text-decoration: none;
-    color: white;
-    text-transform: uppercase;
- }
- .navbar ul li::after{
-    content: '';
-    height: 3px;
-    width: 0;
-    background: #8958cd;
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    transition: 0.5s;
- }
+    color: #212526;
+    display: block;
+    margin: 0 2px;
+    font-weight: 550;
+    font-size: 16px;
+    padding: 8px 18px;
+    transition: 0.2s;
+    border-radius: 30px;
+}
 
- .navbar ul li:hover::after{
-width: 100%; 
+.navbar ul li a:hover {
+    background: #f6f4ff;
+}
+
+.navbar ul li a.relleno {
+    background: #594ef6;
+    color:white;
+}
+
+.navm {
+    display: none;
+    height: fit-content;
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 5px;
+    transition: 0.2s;
+
+}
+
+.navm:hover {
+    background: #f6f4ff;
+}
+
+.navm div {
+    width: 30px;
+    height: 2px;
+    margin: 6px 0;
+    background: #212526;
+}
+
+@media only screen and (max-width: 1100px) {
+    header {
+        width: 90%;
+        padding: 0 20px;
+    }
+    .navbar {
+        position: absolute;
+        left: -300px;
+        top: 0;
+        z-index: 999;
+        width: 280px;
+        height: 100vh;
+        background-color: white;
+        transition: 0.2s;
+        box-shadow: 2px 0 20px 0 rgba(0,0,0,0.05);
+    }
+
+    #navb:checked ~ nav {
+        left: 0
+    }
+
+    .navbar .logo {
+        display: block;
+        height: 70px;
+        margin-top: 25px;
+        display: flex;
+        align-items: center;
+        margin-left: 30px;
+    }
+
+    .navbar ul li a {
+        margin-bottom: 5px;
+        padding: 10px 15px;
+        border-radius: 5px;
+    }
+
+    .navbar ul {
+        display: block;
+        padding: 0 20px;
+        margin-top: 30px;
+    }
+
+    .navm {
+        display: block;
+    }
 }
 
 .content {
@@ -57,36 +137,39 @@ width: 100%;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    text-align: center;
-    color: #fff;
+    text-align: left;
+    margin-left: 140px;
+    color: #f6f4ff;
 }
+
 .content h1{
     font-size: 70px;
-    margin-top: 80px;
-
+    margin-top: -10px;
 }
+
 .content p{
     margin:20px auto;
     font-weight: 100;
     line-height: 25px;
 }
 
-button {
+.content button {
+    font-size: 16px;
     width: 200px;
     padding: 15px 0;
     text-align: center;
     margin: 20px 10px;
     border-radius: 25px;
-    font-weight: bold;
-    border: 2px solid #8958cd;
+    font-weight: 35px;
+    border: 2px solid #594ef6;
     background: transparent;
-    color: #fff;
+    color: #f6f4ff;
     cursor: pointer;
     position: relative;
     overflow: hidden;
 }
-span{
-    background: #8958cd;
+.content span{
+    background: #594ef6;
     height: 100%;
     width: 0;
     border-radius: 25px;
@@ -96,9 +179,73 @@ span{
     z-index: -1;
     transition: 0.5s;
 }
-button:hover span{
+.content button:hover span{
     width: 100%;
 }
-button:hover {
+.content button:hover {
     border: none;
 }
+
+.contenido {
+    height: 40vh;
+    width: 100%;
+    position: absolute;
+    top: 110%; 
+    color: #212526;
+}
+
+.contenido h1 {
+    text-align: right;
+    font-size: 40px;
+    margin-right: 350px;
+}
+
+.contenido p{
+    text-align: left;
+    font-weight: 100;
+    line-height: 25px;
+    margin-left: 785px;
+    margin-top: 15px;
+}
+
+.contenido button {
+    font-size: 16px;
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 30px 785px;
+    border-radius: 25px;
+    font-weight: 35px;
+    border: 2px solid #212526;
+    background: transparent;
+    color: #212526;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.contenido span{
+    background: #e0deec;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left:0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+}
+.contenido button:hover span{
+    width: 100%;
+}
+.contenido button:hover {
+    border: none;
+}
+
+
+
+
+
+
+
+
+
