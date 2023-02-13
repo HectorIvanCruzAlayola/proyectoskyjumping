@@ -13,6 +13,14 @@
     background-position: center;
 }
 
+.banner1 {
+    background-color: rgb(41, 41, 99);
+    width: 100%;
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+}
+
 img {
     width: 100%;
 }
@@ -60,76 +68,8 @@ img {
 }
 
 .navbar ul li a.relleno {
-    background: #594ef6;
+    background: #292d2e;
     color:white;
-}
-
-.navm {
-    display: none;
-    height: fit-content;
-    cursor: pointer;
-    padding: 3px 8px;
-    border-radius: 5px;
-    transition: 0.2s;
-
-}
-
-.navm:hover {
-    background: #f6f4ff;
-}
-
-.navm div {
-    width: 30px;
-    height: 2px;
-    margin: 6px 0;
-    background: #212526;
-}
-
-@media only screen and (max-width: 1100px) {
-    header {
-        width: 90%;
-        padding: 0 20px;
-    }
-    .navbar {
-        position: absolute;
-        left: -300px;
-        top: 0;
-        z-index: 999;
-        width: 280px;
-        height: 100vh;
-        background-color: white;
-        transition: 0.2s;
-        box-shadow: 2px 0 20px 0 rgba(0,0,0,0.05);
-    }
-
-    #navb:checked ~ nav {
-        left: 0
-    }
-
-    .navbar .logo {
-        display: block;
-        height: 70px;
-        margin-top: 25px;
-        display: flex;
-        align-items: center;
-        margin-left: 30px;
-    }
-
-    .navbar ul li a {
-        margin-bottom: 5px;
-        padding: 10px 15px;
-        border-radius: 5px;
-    }
-
-    .navbar ul {
-        display: block;
-        padding: 0 20px;
-        margin-top: 30px;
-    }
-
-    .navm {
-        display: block;
-    }
 }
 
 .content {
@@ -187,7 +127,7 @@ img {
 }
 
 .contenido {
-    height: 50vh;
+    height: 40vh;
     width: 100%;
     position: absolute;
     top: 110%; 
@@ -243,7 +183,7 @@ img {
 
 .fondo {
     background: rgb(24, 24, 24);
-    height: 60vh;
+    height: 75vh;
     width: 100%;
     position: absolute;
     top: 165%; 
@@ -261,7 +201,8 @@ img {
 .titulop h2 {
     color: #f6f4ff;;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 39px;
+    margin-bottom: 25px;
     font-size: 40px;
     font-weight: 400;
 }
@@ -287,7 +228,15 @@ img {
     position: relative;
     overflow: hidden;
     text-align: center;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    transition: all 400ms ease-out;
+    cursor: default;
 }
+
+.card:hover{
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+    transform: translateY(-3%);
+  }
 
 .parrafo h3 {
     font-size: 24px;
@@ -309,16 +258,114 @@ img {
 
 .parrafo a.botoncard {
     background: #343435;
-    color:white;
+    color:#f6f4ff;
 }
 
 .plataformas {
-    position: relative;
+    position: absolute;
+    margin-top: 120px;
 }
 
-.plataformas .
+.plataformas a {
+    display: inline-block;
+    color: #f6f4ff;
+    margin-right: 27px;
+    font-size: 24px;
+}
 
+.footer{
+    position: absolute;
+    align-self: flex-end;
+    top: 240%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    height: 34vh;
+    width: 100vw;
+    font-family: "Open Sans";
+    padding-top: 40px;
+    color: #fff;
+}
+.footercontenido{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.footercontenido h3{
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 3rem;
+}
+.footercontenido p{
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 14px;
+}
+.redes{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+.redes li{
+    margin: 0 10px;
+}
+.redes a{
+    text-decoration: none;
+    color: #fff;
+}
+.redes a i{
+    font-size: 1.4rem;
+    transition: color .4s ease;
+}
 
+.redes a:hover i{
+    color: #9b9b9d;
+}
+
+.footerbottom{
+    background: #000;
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+}
+.footerbottom p{
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+.footerbottom span{
+    text-transform: uppercase;
+    opacity: .4;
+    font-weight: 200;
+    color: #afafb2;;
+}
+
+.sobrenosotros {
+    width: 100%;
+    position: absolute;
+    top: 24%;
+    text-align: center;
+    color: #f6f4ff;
+}
+
+.sobrenosotros h1{
+    font-size: 50px;
+}
+
+.contenidos {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 55%;
+    text-align: center;
+}
 
 
 
