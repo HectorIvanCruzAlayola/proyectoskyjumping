@@ -14,9 +14,9 @@
 }
 
 .banner1 {
-    background-color: rgb(41, 41, 99);
+    background-color: #1f003b;
     width: 100%;
-    height: 50vh;
+    height: 51vh;
     background-size: cover;
     background-position: center;
 }
@@ -38,7 +38,7 @@ img {
 }
 
 .navbar .logo {
-    width: 55px;
+    width: 45px;
     margin-top: 5.5px;
 }
 
@@ -287,6 +287,22 @@ img {
     padding-top: 40px;
     color: #fff;
 }
+
+.footer1{
+    position: absolute;
+    align-self: flex-end;
+    top: 260%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    height: 34vh;
+    width: 100vw;
+    font-family: "Open Sans";
+    padding-top: 40px;
+    color: #fff;
+}
+
 .footercontenido{
     display: flex;
     align-items: center;
@@ -294,18 +310,21 @@ img {
     flex-direction: column;
     text-align: center;
 }
+
 .footercontenido h3{
     font-size: 1.8rem;
     font-weight: 400;
     text-transform: capitalize;
     line-height: 3rem;
 }
+
 .footercontenido p{
     max-width: 500px;
     margin: 10px auto;
     line-height: 28px;
     font-size: 14px;
 }
+
 .redes{
     list-style: none;
     display: flex;
@@ -313,13 +332,16 @@ img {
     justify-content: center;
     margin: 1rem 0 3rem 0;
 }
+
 .redes li{
     margin: 0 10px;
 }
+
 .redes a{
     text-decoration: none;
     color: #fff;
 }
+
 .redes a i{
     font-size: 1.4rem;
     transition: color .4s ease;
@@ -335,11 +357,13 @@ img {
     padding: 20px 0;
     text-align: center;
 }
+
 .footerbottom p{
     font-size: 14px;
     word-spacing: 2px;
     text-transform: capitalize;
 }
+
 .footerbottom span{
     text-transform: uppercase;
     opacity: .4;
@@ -350,24 +374,161 @@ img {
 .sobrenosotros {
     width: 100%;
     position: absolute;
-    top: 24%;
+    top: 20%;
     text-align: center;
     color: #f6f4ff;
 }
 
+.wave {
+    margin-top: 37px;
+    width: 100%;
+}
+
 .sobrenosotros h1{
-    font-size: 50px;
+    font-size: 45px;
 }
 
 .contenidos {
-    text-align: center;
     width: 100%;
     position: absolute;
-    top: 55%;
-    text-align: center;
+    top: 58%;
 }
 
+.contenidos h2 {
+    color: #1f003b;
+    font-size: 31px;
+    text-align: center;
+    font-weight: 700;
+}
 
+.contenidos h3 {
+    color: #444444;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: lighter;
+    font-size: 18px;
+    line-height: 30px;
+}
 
+.mision {
+    width: 100%;
+    position: absolute;
+    top: 103%;
+}
 
+.mision h2 {
+    color: #1f003b;
+    padding-left: 19vh;
+    font-size: 25px;
+    text-align: left;
+    font-weight: 700;
+}
+
+.mision h3 {
+    color: #444444;
+    margin-top: 10px;
+    padding-left: 19vh;
+    text-align: left;
+    font-weight: lighter;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.tituloe h2 {
+    color: #1f003b;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.fondo2 {
+    background: white;
+    height: 75vh;
+    width: 100%;
+    position: absolute;
+    top: 143%; 
+    color: #212526;
+}
+
+.equipo {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.cardequipo {
+    position: relative;
+    margin: 22px;
+    height: 365px;
+    width: 335px;
+    box-shadow: 0 0 2.4em rgba(25, 0, 58, 0.1); 
+    padding: 3.5em 1em;
+    border-radius: 0.6em;
+    color: #1f003b;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: white;
+}
+
+.cardequipo .imagenequipo {
+    width: 8em;
+    height: 8em;
+    background-color: #a993ff;
+    padding: 0.5em;
+    border-radius: 50%;
+    margin: 0 auto 2em auto;
+}
+
+.cardequipo img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.cardequipo h3 {
+    font-weight: 500;
+}
+
+.cardequipo p {
+    font-weight: 100;
+    margin: 0.5em 0 2em 0;
+    letter-spacing: 2px;
+}
+
+.cardequipo .iconosequipo {
+    width: 50%;
+    min-width: 180px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardequipo a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.4em;
+}
+
+.cardequipo:hover {
+    background: linear-gradient(#6045ea, #8567f7);
+    color: white;
+}
+
+.cardequipo:hover .imagenequipo {
+    transform: scale(1.15);
+}
+
+.contacto {
+    width: 100%;
+    position: absolute;
+    top: 111em;
+}
+
+.contacto h2 {
+    color: #1f003b;
+    padding-left: 13vh;
+    font-size: 25px;
+    text-align: left;
+    font-weight: 700;
+}
 
