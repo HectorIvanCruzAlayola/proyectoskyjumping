@@ -291,7 +291,7 @@ img {
 .footer1{
     position: absolute;
     align-self: flex-end;
-    top: 260%;
+    top: 292%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -411,14 +411,21 @@ img {
 }
 
 .mision {
-    width: 100%;
     position: absolute;
-    top: 103%;
+    width: 58%;
+    top: 93%;
+    margin: 0;
+    height: 350px;
+    box-shadow: 0 0 2.4em rgba(25, 0, 66, 0.1); 
+    border-radius: 0.3em;
+    color: #1f003b;
+    background-color: white;
 }
 
 .mision h2 {
     color: #1f003b;
     padding-left: 19vh;
+    margin-top: 74px;
     font-size: 25px;
     text-align: left;
     font-weight: 700;
@@ -521,14 +528,100 @@ img {
 .contacto {
     width: 100%;
     position: absolute;
-    top: 111em;
+    top: 110em;
+    margin: 50px auto;
 }
 
 .contacto h2 {
     color: #1f003b;
-    padding-left: 13vh;
-    font-size: 25px;
+    padding-left: 6.9vh;
+    font-size: 30px;
     text-align: left;
     font-weight: 700;
+    margin-bottom: 48px;
 }
+
+.cuadrocontacto {
+    background: white;
+    display: flex;
+}
+
+.izquierdol {
+    flex-basis: 60%;
+    background: rgb(252, 252, 252);
+    padding: 40px 60px;
+}
+
+.izquierdol h3 {
+    color: #212526;
+    margin-bottom: 30px;
+}
+
+.derechol {
+    flex-basis: 40%;
+    padding: 40px;
+    background: #6348cd;
+    color: white;
+}
+
+.inputrow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.inputrow .inputgroup {
+    flex-basis: 45%;
+}
+
+input {
+    width: 100%;
+    border: none;
+    background: rgb(252, 252, 252);
+    border-bottom: 1px solid rgb(252, 252, 252);
+    outline: none;
+    padding-bottom: 5px;
+}
+
+textarea {
+    background:rgb(252, 252, 252);
+    border-radius: 4px;
+    width: 100%;
+    border: 1px solid rgb(252, 252, 252);
+    outline: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+label {
+    margin-bottom: 6px;
+    display: block;
+    color: #1f003b;
+}
+
+.bcontacto {
+    font-size: 15px;
+    cursor: pointer;
+    background: #212526;
+    width: 80px;
+    border: none;
+    outline: none;
+    color: white;
+    height: 35px;
+    border-radius: 30px;
+    margin-top: 20px;
+    box-shadow: 0px 5px 15px 0px rgba(28, 0, 181, 0.3);
+}
+
+tr td:first-child {
+    padding-right: 20px;
+}
+
+tr td {
+    padding-top: 40px;
+    font-weight: 200;
+}
+
+
+
 
