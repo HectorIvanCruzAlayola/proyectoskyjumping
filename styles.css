@@ -21,6 +21,15 @@
     background-position: center;
 }
 
+.banner2 {
+    background-image: linear-gradient(rgb(21, 52, 92), rgb(29, 82, 143),rgb(32, 91, 159));
+    background-color:rgb(24, 59, 104);
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
 img {
     width: 100%;
 }
@@ -78,19 +87,20 @@ img {
     top: 50%;
     transform: translateY(-50%);
     text-align: left;
-    margin-left: 140px;
     color: #f6f4ff;
 }
 
 .content h1{
     font-size: 70px;
     margin-top: -10px;
+    margin-left: 140px;
 }
 
 .content p{
     margin:20px auto;
     font-weight: 100;
     line-height: 25px;
+    margin-left: 140px;
 }
 
 .content button {
@@ -98,7 +108,10 @@ img {
     width: 200px;
     padding: 15px 0;
     text-align: center;
-    margin: 20px 10px;
+    margin-top: 20px;
+    margin-left: 150px;
+    margin-right: -130px;
+    margin-bottom: 18px;
     border-radius: 25px;
     font-weight: 35px;
     border: 2px solid #594ef6;
@@ -153,7 +166,8 @@ img {
     width: 200px;
     padding: 15px 0;
     text-align: center;
-    margin: 30px 785px;
+    margin-top: 30px;
+    margin-left: 785px;
     border-radius: 25px;
     font-weight: 35px;
     border: 2px solid #212526;
@@ -264,6 +278,7 @@ img {
 .plataformas {
     position: absolute;
     margin-top: 120px;
+    margin-left: 140px;
 }
 
 .plataformas a {
@@ -292,6 +307,21 @@ img {
     position: absolute;
     align-self: flex-end;
     top: 292%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    height: 34vh;
+    width: 100vw;
+    font-family: "Open Sans";
+    padding-top: 40px;
+    color: #fff;
+}
+
+.footer2{
+    position: absolute;
+    align-self: flex-end;
+    top: 100%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -622,6 +652,90 @@ tr td {
     font-weight: 200;
 }
 
+.maquetado {
+    width: 100%;
+    position: absolute;
+    top: 19%;
+    text-align: center;
+    color: #f6f4ff;
+}
 
+.maquetado h1{
+    font-size: 43px;
+    text-align: center;
+    color: white;
+}
 
+.maquetado h2 {
+    font-size: 30px;
+    text-align: right;
+    margin-top: 15vh;
+    margin-right: 40vh;
+    color: white;
+}
 
+.maquetado p {
+    font-size: 15.5px;
+    font-weight: 300;
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 916px;
+    color: white;
+    line-height: 30px;
+}
+
+.boceto {
+    width: 100%;
+    position: absolute;
+    top: 34%; 
+}
+
+.deslizarp {
+	position: relative;
+	max-width: 48rem;
+	margin-left: 10vh;
+}
+
+.deslizar {
+	display: flex;
+	aspect-ratio: 16 / 9;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	box-shadow: 0rem 1.8rem 3rem 0.5rem hsla(0, 0%, 0%, 0.25);
+	border-radius: 0.5rem;
+	scrollbar-width: none;
+}
+
+.deslizar::-webkit-scrollbar {
+	display: none;
+}
+
+.deslizar img {
+	flex: 1 0 100%;
+	scroll-snap-align: start;
+	object-fit: cover;
+}
+
+.deslizar-nav {
+	display: flex;
+	column-gap: 1rem;
+	position: absolute;
+	bottom: 1.25rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
+}
+
+.deslizar-nav a {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background-color: #fff;
+	opacity: 0.75;
+	transition: opacity ease 250ms;
+}
+
+.deslizar-nav a:hover {
+	opacity: 1;
+}
