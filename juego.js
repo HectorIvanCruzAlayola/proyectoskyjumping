@@ -6,6 +6,7 @@ canvas.height = 765
 
 const gravity = 1
 
+
 class Player {
     constructor(position) {
         this.position = position
@@ -44,17 +45,12 @@ const player2 = new Player({
 
 const keys = {
     d: {
-        pressed: false
+        pressed: false,
     },
     a: {
-        pressed: false
+        pressed: false,
     },
-    w: {
-        pressed: false
-    }
 }
-
-let lastKey
 
 function animate () {
     window.requestAnimationFrame(animate)
@@ -64,8 +60,8 @@ function animate () {
     player2.update()
 
     player.velocity.x = 0
-    if(keys.d.pressed && lastKey === 'd') player.velocity.x = 5
-    else if (keys.a.pressed && lastKey === 'a') player.velocity.x = -5
+    if(keys.d.pressed) player.velocity.x = 5
+    else if (keys.a.pressed) player.velocity.x = -5
 }
 
 animate()
@@ -74,17 +70,14 @@ window.addEventListener('keydown', (event) =>{
     switch(event.key) {
         case 'd':
         keys.d.pressed = true
-        lastKey = 'd'
         break
         case 'a':
         keys.a.pressed = true
-        lastKey = 'a'
         break
         case 'w':
-        if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -20
+        player.velocity.y = -20 
         break
     }
-    console.log(event.key)
 })
 
 window.addEventListener('keyup', (event) =>{
@@ -99,6 +92,4 @@ window.addEventListener('keyup', (event) =>{
         keys.w.pressed = false
         break
     }
-    console.log(event.key)
 })
-
