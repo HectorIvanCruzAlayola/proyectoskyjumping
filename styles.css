@@ -306,7 +306,7 @@ img {
 .footer1{
     position: absolute;
     align-self: flex-end;
-    top: 292%;
+    top: 352%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -443,7 +443,7 @@ img {
 .mision {
     position: absolute;
     width: 58%;
-    top: 93%;
+    top: 98%;
     margin: 0;
     height: 350px;
     box-shadow: 0 0 2.4em rgba(25, 0, 66, 0.1); 
@@ -471,6 +471,39 @@ img {
     line-height: 30px;
 }
 
+.vision {
+    position: absolute;    
+    width: 58%;
+    top: 152%;
+    margin-left: 74vh;
+    height: 350px;
+    box-shadow: 0 0 2.4em rgba(25, 0, 66, 0.1); 
+    border-radius: 0.3em;
+    color: #1f003b;
+    background-color: white;
+}
+
+.vision h2 {
+    color: #1f003b;
+    padding-left: 73vh;
+    margin-top: 74px;
+    font-size: 25px;
+    text-align: left;
+    font-weight: 700;
+}
+
+.vision h3 {
+    color: #444444;
+    margin-top: 10px;
+    padding-right: 19vh;
+    text-align: right;
+    font-weight: lighter;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+
+
 .tituloe h2 {
     color: #1f003b;
     text-align: center;
@@ -483,7 +516,7 @@ img {
     height: 75vh;
     width: 100%;
     position: absolute;
-    top: 143%; 
+    top: 205%; 
     color: #212526;
 }
 
@@ -558,7 +591,7 @@ img {
 .contacto {
     width: 100%;
     position: absolute;
-    top: 110em;
+    top: 140em;
     margin: 50px auto;
 }
 

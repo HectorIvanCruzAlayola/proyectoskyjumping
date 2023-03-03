@@ -321,7 +321,7 @@ label {
 }
 
 [type="checkbox"]:checked + label .ui:after {
-  content: "yes";
+  content: "sí";
   color: #ffffff;
 }
 
