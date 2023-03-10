@@ -22,8 +22,7 @@
 }
 
 .banner2 {
-    background-image: linear-gradient(rgb(21, 52, 92), rgb(29, 82, 143),rgb(32, 91, 159));
-    background-color:rgb(24, 59, 104);
+    background: #886fee;
     width: 100%;
     height: 100vh;
     background-size: cover;
@@ -143,7 +142,7 @@ img {
     height: 40vh;
     width: 100%;
     position: absolute;
-    top: 110%; 
+    top: 115%; 
     color: #212526;
 }
 
@@ -222,6 +221,8 @@ img {
 }
 
 .parrafo a {
+    pointer-events: none; 
+    cursor: default; 
     text-decoration: none;
     color: #f6f4ff;
     margin: 0 2px;
@@ -776,27 +777,35 @@ tr td {
 .Nosotros {
     width: 470px;
     height: 340px;
-    display: flex; 
+    display: block; 
     margin-left: 18vh;
-    margin-top: -47vh;
+    margin-top: -36vh;
+    border-radius: 10px;
+    box-shadow: 0px 1px 10px rgb(214, 213, 213);
 }
 
 .empresa{
     width: 370px;
     height: 270px;
     display: flex; 
-    margin-left: 140vh;
-    margin-top: -38vh;
-    border-radius: 20px;
+    margin-left: 116vh;
+    margin-top: -28vh;
+    border-radius: 10px;
     box-shadow: 0px 1px 10px rgb(214, 213, 213);
 }
 
 .empresa2 {
-    width: 370px;
-    height: 270px;
+    width: 450px;
+    height: 260px;
     display: flex; 
-    margin-left: -70vh;
-    margin-top: -38vh;
-    border-radius: 20px;
+    margin-left: -64vh;
+    margin-top: -28vh;
+    border-radius: 10px;
     box-shadow: 0px 1px 10px rgb(214, 213, 213);
+}
+
+.secproc {
+    pointer-events: none; 
+    cursor: default; 
+
 }
