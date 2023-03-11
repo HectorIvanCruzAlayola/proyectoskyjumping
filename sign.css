@@ -347,6 +347,8 @@ label {
 }
 
 .btn-signin {
+  text-decoration: none;
+  color: rgba(255,255,255,.7);
   float: left;
   padding-top: 8px;
   width: 100%;

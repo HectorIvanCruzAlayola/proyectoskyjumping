@@ -1,12 +1,12 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-canvas.width = 1500
-canvas.height = 772
+canvas.width = 1420 
+canvas.height = 750
 
 const scaledCanvas = {
-    width: canvas.width / 4,
-    height: canvas.height / 4
+    width: canvas.width / 3.5,
+    height: canvas.height / 3.5
 }
 
 const gravity = 1
@@ -84,7 +84,7 @@ const background = new Sprite({
         x: 0,
         y: 0,
     },
-    imageSrc: 'img/map.png',
+    imageSrc: 'img/Fondo.jpeg',
 })
 
 function animate () {
@@ -93,7 +93,7 @@ function animate () {
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     c.save()
-    c.scale(4, 4)
+    c.scale(3.5, 3.5)
     c.translate(0, -background.image.height + scaledCanvas.height)
     background.update()
     c.restore()
