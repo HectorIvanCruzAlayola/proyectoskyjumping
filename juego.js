@@ -6,63 +6,59 @@ canvas.height = 750
 
 const scaledCanvas = {
     width: canvas.width / 3.5,
-    height: canvas.height / 3.5
+    height: canvas.height / 3.5,
 }
+
+const floorCollisions2D = []
+for (let i = 0; i < floorCollisions.length; i += 65) {
+    floorCollisions2D.push(floorCollisions.slice(i, i + 65))
+}
+
+const collisionBlocks = []
+floorCollisions2D.forEach((row, y) => {
+    row.forEach((symbol, x) => {
+        console.log(symbol)
+        if(symbol === 271 || symbol === 280) {
+            collisionBlocks.push(new CollisionBlock({position: {
+                x: x * 16,
+                y: y * 16,
+            },
+        })
+        )
+        }
+    })
+})
+
+const platformCollisions2D = []
+for (let i = 0; i < platformCollisions.length; i += 65) {
+    platformCollisions2D.push(platformCollisions.slice(i, i + 65))
+}
+
+
+const platformCollisionBlocks = []
+platformCollisions2D.forEach((row, y) => {
+    row.forEach((symbol, x) => {
+        console.log(symbol)
+        if(symbol === 279) {
+            platformCollisionBlocks.push(new CollisionBlock({position: {
+                x: x * 16,
+                y: y * 16,
+            },
+        })
+        )
+        }
+    })
+})
 
 const gravity = 1
 
-class Sprite  {
-    constructor({position, imageSrc}) {
-        this.position = position
-        this.image = new Image()
-        this.image.src = imageSrc
-    }
-
-    draw() {
-        if (!this.image) return
-        c.drawImage(this.image, this.position.x, this.position.y)
-    }
-
-    update() {
-        this.draw()
-    }
-}
-
-
-class Player {
-    constructor(position) {
-        this.position = position
-        this.velocity = {
-            x: 0,
-            y: 1,
-        }
-        this.height = 100
-    }
-
-     draw() {
-        c.fillStyle = 'red'
-        c.fillRect (this.position.x, this.position.y, 100, this.height)
-     }
-
-     update () {
-        this.draw()
-
-        this.position.x += this.velocity.x
-        this.position.y += this.velocity.y
-
-        if (this.position.y + this.height + this.velocity.y < canvas.height) 
-        this.velocity.y += gravity
-        else this.velocity.y = 0
-     }
-}
 
 const player = new Player({
-    x: 0,
-    y: 0,
-})
-const player2 = new Player({
-    x: 300,
-    y: 100,
+    position: {
+        x: 207,
+        y: 350,
+    },
+    collisionBlocks, 
 })
 
 const keys = {
@@ -93,17 +89,24 @@ function animate () {
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     c.save()
-    c.scale(3.5, 3.5)
-    c.translate(0, -background.image.height + scaledCanvas.height)
+    // c.scale(3.5, 3.5)
+    // c.translate(0, -background.image.height + scaledCanvas.height)
     background.update()
-    c.restore()
+    collisionBlocks.forEach((collisionBlock) => {
+        collisionBlock.update()
+    })
+
+    platformCollisionBlocks.forEach((block) => {
+        block.update()
+    })
 
     player.update()
-    player2.update()
 
     player.velocity.x = 0
     if(keys.d.pressed && lastKey === 'd') player.velocity.x = 5
     else if (keys.a.pressed && lastKey === 'a') player.velocity.x = -5
+
+    c.restore()
 }
 
 animate()
@@ -119,7 +122,7 @@ window.addEventListener('keydown', (event) =>{
         lastKey = 'a'
         break
         case 'w':
-        if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -20
+        if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -15
         break
     }
     console.log(event.key)
