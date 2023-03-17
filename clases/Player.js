@@ -1,25 +1,22 @@
-class Player {
-    constructor({position, collisionBlocks}) {
+class Player extends Sprite {
+    constructor({position, collisionBlocks, imageSrc, frameRate, scale = 0.5}) {
+        super({imageSrc, frameRate, scale})
         this.position = position
         this.velocity = {
             x: 0,
             y: 1,
         }
-        this.width = 100 / 3.5
-        this.height = 100 / 3.5
+
         this.collisionBlocks = collisionBlocks
     }
 
-     draw() {
-        c.fillStyle = 'red'
-        c.fillRect (this.position.x, this.position.y, this.width, this.height)
-     }
-
      update () {
+        this.updateFrames()
+        c.fillStyle = 'rgba(0, 255, 0, 0)'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
         this.draw()
 
         this.position.x += this.velocity.x
-        this.checkForHorizontalCollisions()
         this.applyGravity()
         this.checkForVerticalCollisions()
      }
@@ -34,17 +31,7 @@ class Player {
                     object2: collisionBlock,
                 })
                 ) {
-                    if (this.velocity.x > 0) {
-                        this.velocity.x = 0 
-                        this.position.x = collisionBlock.position.x - this.width - 0.01
-                        break
-                    }
 
-                    if (this.velocity.x < 0) {
-                        this.velocity.x = 0 
-                        this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01
-                        break
-                    }
             }
         }
      } 
@@ -67,15 +54,11 @@ class Player {
                 ) {
                     if (this.velocity.y > 0) {
                         this.velocity.y = 0 
-                        this.position.y = collisionBlock.position.y - this.height - 0.01
+                        this.position.y = collisionBlock.position.y - this.height 
                         break
                     }
 
-                    if (this.velocity.y < 0) {
-                        this.velocity.y = 0 
-                        this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01
-                        break
-                    }
+
             }
         }
      } 

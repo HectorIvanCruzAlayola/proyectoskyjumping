@@ -5,8 +5,8 @@ canvas.width = 1420
 canvas.height = 750
 
 const scaledCanvas = {
-    width: canvas.width / 3.5,
-    height: canvas.height / 3.5,
+    width: canvas.width / 2,
+    height: canvas.height / 2,
 }
 
 const floorCollisions2D = []
@@ -18,7 +18,7 @@ const collisionBlocks = []
 floorCollisions2D.forEach((row, y) => {
     row.forEach((symbol, x) => {
         console.log(symbol)
-        if(symbol === 271 || symbol === 280) {
+        if(symbol === 271 || symbol === 280 || symbol === 279) {
             collisionBlocks.push(new CollisionBlock({position: {
                 x: x * 16,
                 y: y * 16,
@@ -59,6 +59,8 @@ const player = new Player({
         y: 350,
     },
     collisionBlocks, 
+    imageSrc: './img/personaje/Idle.png',
+    frameRate: 10,
 })
 
 const keys = {
@@ -103,8 +105,8 @@ function animate () {
     player.update()
 
     player.velocity.x = 0
-    if(keys.d.pressed && lastKey === 'd') player.velocity.x = 5
-    else if (keys.a.pressed && lastKey === 'a') player.velocity.x = -5
+    if(keys.d.pressed && lastKey === 'd') player.velocity.x = 2
+    else if (keys.a.pressed && lastKey === 'a') player.velocity.x = -2
 
     c.restore()
 }
@@ -122,7 +124,7 @@ window.addEventListener('keydown', (event) =>{
         lastKey = 'a'
         break
         case 'w':
-        if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -15
+        if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -12
         break
     }
     console.log(event.key)

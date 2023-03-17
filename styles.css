@@ -55,6 +55,14 @@ img {
     display: flex;
 }
 
+.logoskyjumping {
+    width: 600px;
+    height: 300px;
+    display: flex;
+    margin-left: 87vh;
+    margin-top: -50vh;
+}
+
 .navbar ul li {
     list-style: none;
 }
@@ -83,7 +91,7 @@ img {
 .content {
     width: 100%;
     position: absolute;
-    top: 50%;
+    top: 48%;
     transform: translateY(-50%);
     text-align: left;
     color: #f6f4ff;
@@ -301,7 +309,7 @@ img {
 
 .plataformas {
     position: absolute;
-    margin-top: 120px;
+    margin-top: 124px;
     margin-left: 140px;
 }
 
@@ -310,6 +318,8 @@ img {
     color: #f6f4ff;
     margin-right: 27px;
     font-size: 24px;
+    cursor: default;
+    pointer-events: none;
 }
 
 .footer{
