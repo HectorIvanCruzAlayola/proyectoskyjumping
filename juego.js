@@ -1,8 +1,11 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
+
+
 canvas.width = 1420
 canvas.height = 750
+
 
 const scaledCanvas = {
   width: canvas.width / 4.8,
@@ -17,7 +20,7 @@ for (let i = 0; i < floorCollisions.length; i += 65) {
 const collisionBlocks = []
 floorCollisions2D.forEach((row, y) => {
   row.forEach((symbol, x) => {
-    if (symbol === 271 || symbol === 280 || symbol === 279) {
+    if (symbol === 574 || symbol === 324) {
       collisionBlocks.push(
         new CollisionBlock({
           position: {
@@ -38,7 +41,7 @@ for (let i = 0; i < platformCollisions.length; i += 65) {
 const platformCollisionBlocks = []
 platformCollisions2D.forEach((row, y) => {
   row.forEach((symbol, x) => {
-    if (symbol === 279) {
+    if (symbol === 324) {
       platformCollisionBlocks.push(
         new CollisionBlock({
           position: {
@@ -52,6 +55,8 @@ platformCollisions2D.forEach((row, y) => {
 })
 
 const gravity = 1
+
+
 
 const player = new Player({
   position: {
@@ -106,6 +111,8 @@ const player = new Player({
   },
 })
 
+
+
 const keys = {
   d: {
     pressed: false,
@@ -120,7 +127,7 @@ const background = new Sprite({
     x: 0,
     y: 0,
   },
-  imageSrc: 'img/Fondo.jpeg',
+  imageSrc: 'img/fondonuevos.png',
 })
 
 const backgroundImageHeight = 436
@@ -133,7 +140,10 @@ const camera = {
 }
 
 function animate() {
-  window.requestAnimationFrame(animate)
+  if (!isPaused) {
+    window.requestAnimationFrame(animate)
+  }
+
   c.fillStyle = 'white'
   c.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -149,6 +159,7 @@ function animate() {
   //   block.update()
   // })
 
+  
   player.checkForHorizontalCanvasCollision()
   player.update()
 
@@ -181,7 +192,32 @@ function animate() {
   c.restore()
 }
 
+const pauseBtn = document.getElementById('pauseBtn')
+const resumeBtn = document.getElementById('resumeBtn')
+const restartBtn = document.getElementById('restartBtn')
+let isPaused = false
+
+pauseBtn.addEventListener('click', () => {
+  isPaused = true
+  pauseBtn.disabled = true
+  resumeBtn.disabled = false
+})
+
+resumeBtn.addEventListener('click', () => {
+  isPaused = false
+  animate()
+  pauseBtn.disabled = false
+  resumeBtn.disabled = true
+})
+
+restartBtn.addEventListener('click', () => {
+  window.location.reload()
+})
+
+
+
 animate()
+
 
 window.addEventListener('keydown', (event) => {
   switch (event.key) {
@@ -207,3 +243,4 @@ window.addEventListener('keyup', (event) => {
       break
   }
 })
+
