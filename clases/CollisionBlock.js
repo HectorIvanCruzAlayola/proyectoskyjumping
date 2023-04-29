@@ -14,3 +14,4 @@ class CollisionBlock {
     this.draw()
   }
 }
+
