@@ -1,11 +1,8 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-
-
 canvas.width = 1420
 canvas.height = 750
-
 
 const scaledCanvas = {
   width: canvas.width / 4.8,
@@ -20,7 +17,17 @@ for (let i = 0; i < floorCollisionsLevel2.length; i += 65) {
 const collisionBlocks = []
 floorCollisions2DLevel2.forEach((row, y) => {
   row.forEach((symbol, x) => {
-    if (symbol === 574 || symbol === 575 || symbol === 324) {
+    if (symbol === 574 || symbol === 324) {
+      collisionBlocks.push(
+        new CollisionBlock({
+          position: {
+            x: x * 16,
+            y: y * 16,
+          },
+        })
+      )
+    }
+    if (symbol === 575) {
       collisionBlocks.push(
         new CollisionBlock({
           position: {
@@ -32,8 +39,6 @@ floorCollisions2DLevel2.forEach((row, y) => {
     }
   })
 })
-
-
 
 const platformCollisions2DLevel2 = []
 for (let i = 0; i < platformCollisionsLevel2.length; i += 65) {
@@ -56,15 +61,34 @@ platformCollisions2DLevel2.forEach((row, y) => {
   })
 })
 
+let lives = 3;
+let gameOver = false;
+
+function changeLevel() {
+  window.location.href = './juego2.html'
+}
+
+// Parte que no sirve
+Player.prototype.checkForCollisionWithBlock = function (block) {
+  if (
+    this.position.x + this.width > block.position.x &&
+    this.position.x < block.position.x + block.width &&
+    this.position.y + this.height > block.position.y &&
+    this.position.y < block.position.y + block.height &&
+    block.symbol === 575
+  ) {
+    changeLevel()
+  }
+}
+//
+
 const gravity = 1
-
-
 
 const player = new Player({
   position: {
     x: 175,
     y: 350,
-  },
+  },  
   collisionBlocks,
   platformCollisionBlocks,
   imageSrc: './img/personaje/Idle.png',
@@ -113,8 +137,6 @@ const player = new Player({
   },
 })
 
-
-
 const keys = {
   d: {
     pressed: false,
@@ -142,6 +164,10 @@ const camera = {
 }
 
 function animate() {
+  if (gameOver) {
+    return;
+  }
+
   if (!isPaused) {
     window.requestAnimationFrame(animate)
   }
@@ -151,20 +177,18 @@ function animate() {
 
   c.save()
   c.scale(2.1, 2.1)
+
   c.translate(camera.position.x, camera.position.y)
   background.update()
-  // collisionBlocks.forEach((collisionBlock) => {
-  //   collisionBlock.update()
-  // })
 
-  // platformCollisionBlocks.forEach((block) => {
-  //   block.update()
-  // })
-
-  
+  // Parte que no sirve
   player.checkForHorizontalCanvasCollision()
-  player.update()
+  collisionBlocks.forEach((block) => {
+    player.checkForCollisionWithBlock(block)
+  })
+  //
 
+  player.update()
   player.velocity.x = 0
   if (keys.d.pressed) {
     player.switchSprite('Run')
@@ -180,7 +204,6 @@ function animate() {
     if (player.lastDirection === 'right') player.switchSprite('Idle')
     else player.switchSprite('IdleLeft')
   }
-
   if (player.velocity.y < 0) {
     player.shouldPanCameraDown({ camera, canvas })
     if (player.lastDirection === 'right') player.switchSprite('Jump')
@@ -191,7 +214,27 @@ function animate() {
     else player.switchSprite('FallLeft')
   }
 
-  c.restore()
+
+  if (player.position.y > canvas.height) {
+    lives--;
+    document.getElementById("lives").textContent = "Vidas: " + lives;
+    if (lives <= 0) {
+      gameOver = true
+      const gameOverMsg = document.createElement("h1");
+      gameOverMsg.textContent = "Game Over";
+      gameOverMsg.style.color = "white"; 
+      document.getElementById("game-container").appendChild(gameOverMsg);
+      document.getElementById("pauseBtn").disabled = true;
+      document.getElementById("resumeBtn").disabled = true;
+    } else {
+      player.position.x = 175;
+      player.position.y = 350;
+      camera.position.x = 0;
+      camera.position.y = -backgroundImageHeight + scaledCanvas.height;
+    }
+  }  
+  
+  c.restore()  
 }
 
 const pauseBtn = document.getElementById('pauseBtn')
@@ -215,8 +258,6 @@ resumeBtn.addEventListener('click', () => {
 restartBtn.addEventListener('click', () => {
   window.location.reload()
 })
-
-
 
 animate()
 
@@ -245,4 +286,7 @@ window.addEventListener('keyup', (event) => {
       break
   }
 })
+
+
+
 

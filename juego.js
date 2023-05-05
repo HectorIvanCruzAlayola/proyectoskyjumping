@@ -63,6 +63,7 @@ const player = new Player({
     x: 175,
     y: 350,
   },
+  level: 1,
   collisionBlocks,
   platformCollisionBlocks,
   imageSrc: './img/personaje/Idle.png',
@@ -151,6 +152,7 @@ function animate() {
   c.scale(2.1, 2.1)
   c.translate(camera.position.x, camera.position.y)
   background.update()
+
   // collisionBlocks.forEach((collisionBlock) => {
   //   collisionBlock.update()
   // })
@@ -162,7 +164,6 @@ function animate() {
   
   player.checkForHorizontalCanvasCollision()
   player.update()
-
   player.velocity.x = 0
   if (keys.d.pressed) {
     player.switchSprite('Run')
@@ -178,7 +179,6 @@ function animate() {
     if (player.lastDirection === 'right') player.switchSprite('Idle')
     else player.switchSprite('IdleLeft')
   }
-
   if (player.velocity.y < 0) {
     player.shouldPanCameraDown({ camera, canvas })
     if (player.lastDirection === 'right') player.switchSprite('Jump')

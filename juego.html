@@ -3,21 +3,93 @@
     background: black;
   }
 
+  @font-face {
+    font-family: miFuente;
+    src: url(fuentes/Retro\ Gaming.ttf);
+  }
+
+  #lives{
+    font-family: miFuente;
+    color: white;
+    font-size: 18px;
+    margin-left: 82.7rem;
+    margin-top: -49rem;
+  }
   
+  #game-container {
+      font-family: miFuente;
+      font-size: 35px;
+      text-align: center;
+      margin-top: 19.5rem;
+    }
+
+    .textob {
+      display: flex;
+    }
+
+    #pauseBtn {
+      text-align: center;
+      justify-content: center;
+      background-color: rgb(219, 217, 217);
+      margin-right: 7px;
+      margin-top: 10px;
+      font-family: miFuente;
+      border-radius: 4px;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    #pauseBtn:hover {
+    background: #b5b4b4;
+    }
+
+    #resumeBtn {
+      background-color: rgb(219, 217, 217);
+      margin-top: 10px;
+      margin-right: 7px;
+      font-family: miFuente;
+      border-radius: 4px;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    #resumeBtn:hover {
+    background: #b5b4b4;
+    }
+
+    #restartBtn {
+      background-color: rgb(219, 217, 217);
+      margin-top: 10px;
+      font-family: miFuente;
+      border-radius: 4px;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    #restartBtn:hover {
+    background: #b5b4b4;
+    }
+
+    
+
 </style>
 <canvas></canvas>
 
-<button id="pauseBtn">Pausa</button>
-<button id="resumeBtn" disabled>Reanudar</button>
-<button id="restartBtn">Reiniciar</button>
-
+<div class="textob">
+  <button id="pauseBtn">Pausa</button>
+  <button id="resumeBtn" disabled>Reanudar</button>
+  <button id="restartBtn">Reiniciar</button>
+</div>
+<div id="lives">Vidas: 3</div>
+<div id="game-container"></div>
 <script src="utilidad.js"></script>
 <script src="./clases/CollisionBlock.js"></script>
 <script src="./clases/Sprite.js"></script>
 <script src="./clases/Player.js"></script>
 <script src="./informacioncolisiones/collisiones.js"></script>
 <script src="juego2.js"></script>
-<script src="juego.js"></script>
+
+
 
 
 

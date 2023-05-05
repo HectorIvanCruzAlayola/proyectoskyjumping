@@ -8,6 +8,7 @@ class Player extends Sprite {
     scale = 0.5,
     animations,
   }) {
+
     super({ imageSrc, frameRate, scale })
     this.position = position
     this.velocity = {
@@ -64,7 +65,7 @@ class Player extends Sprite {
       width: 200,
       height: 80,
     }
-  }
+  } 
 
   checkForHorizontalCanvasCollision() {
     if (
@@ -134,7 +135,6 @@ class Player extends Sprite {
     //   this.camerabox.width,
     //   this.camerabox.height
     // )
-
     // draws out the image
     // c.fillStyle = 'rgba(0, 255, 0, 0.2)'
     // c.fillRect(this.position.x, this.position.y, this.width, this.height)
@@ -200,7 +200,7 @@ class Player extends Sprite {
       }
     }
   }
-
+  
   applyGravity() {
     this.velocity.y += gravity
     this.position.y += this.velocity.y
