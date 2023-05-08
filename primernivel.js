@@ -1,11 +1,8 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-
-
 canvas.width = 1420
 canvas.height = 750
-
 
 const scaledCanvas = {
   width: canvas.width / 4.8,
@@ -20,7 +17,17 @@ for (let i = 0; i < floorCollisions.length; i += 65) {
 const collisionBlocks = []
 floorCollisions2D.forEach((row, y) => {
   row.forEach((symbol, x) => {
-    if (symbol === 574 || symbol === 324) {
+    if (symbol === 574 || symbol === 428|| symbol === 325 || symbol === 324) {
+      collisionBlocks.push(
+        new CollisionBlock({
+          position: {
+            x: x * 16,
+            y: y * 16,
+          },
+        })
+      )
+    }
+    if (symbol === 732) {
       collisionBlocks.push(
         new CollisionBlock({
           position: {
@@ -32,6 +39,7 @@ floorCollisions2D.forEach((row, y) => {
     }
   })
 })
+  
 
 const platformCollisions2D = []
 for (let i = 0; i < platformCollisions.length; i += 65) {
@@ -54,16 +62,18 @@ platformCollisions2D.forEach((row, y) => {
   })
 })
 
+let lives = 3;
+let gameOver = false;
+
+
 const gravity = 1
-
-
 
 const player = new Player({
   position: {
     x: 175,
     y: 350,
-  },
-  level: 1,
+  },  
+
   collisionBlocks,
   platformCollisionBlocks,
   imageSrc: './img/personaje/Idle.png',
@@ -112,8 +122,6 @@ const player = new Player({
   },
 })
 
-
-
 const keys = {
   d: {
     pressed: false,
@@ -128,7 +136,7 @@ const background = new Sprite({
     x: 0,
     y: 0,
   },
-  imageSrc: 'img/fondonuevos.png',
+  imageSrc: 'img/primernivel.png',
 })
 
 const backgroundImageHeight = 436
@@ -141,28 +149,64 @@ const camera = {
 }
 
 function animate() {
+  if (gameOver) {
+    return;
+  }
+
   if (!isPaused) {
     window.requestAnimationFrame(animate)
   }
 
   c.fillStyle = 'white'
   c.fillRect(0, 0, canvas.width, canvas.height)
-
   c.save()
   c.scale(2.1, 2.1)
+
+
   c.translate(camera.position.x, camera.position.y)
   background.update()
 
-  // collisionBlocks.forEach((collisionBlock) => {
-  //   collisionBlock.update()
-  // })
 
-  // platformCollisionBlocks.forEach((block) => {
-  //   block.update()
-  // })
-
-  
   player.checkForHorizontalCanvasCollision()
+
+// Detector de colisiones de bloques con "symbol"
+const margin = 0
+floorCollisions2D.forEach((row, y) => {
+    row.forEach((symbol, x) => {
+      if (symbol === 324) {
+        const blockPosition = {
+          x: x * 16,
+          y: y * 16,
+        }
+        if (
+          player.position.x < blockPosition.x + 5 + margin &&
+          player.position.x + player.width > blockPosition.x - margin + 20 &&
+          player.position.y < blockPosition.y + 5 + margin &&
+          player.position.y + player.height > blockPosition.y 
+        ) {
+          // player has collided with block 732, handle collision here
+          console.log('Collision with block detected')
+          // window.location.href = "segundonivel.html"
+        }
+      }
+    })
+  })
+  
+
+  // collisionBlocks.forEach(block => {
+    // if (block.symbol === 732) {
+      //  if (detectCollision(player, block)) {
+        //  console.log('Collision detected with block', block)
+       //  window.location.href = 'segundonivel.html'
+      // }
+   //  } else {
+     //  if (detectCollision(player, block)) {
+       //  console.log('Collision detected with block', block)
+        // Aquí puedes agregar la lógica para manejar la colisión
+     //  }
+   //  }
+  // })
+    
   player.update()
   player.velocity.x = 0
   if (keys.d.pressed) {
@@ -189,7 +233,27 @@ function animate() {
     else player.switchSprite('FallLeft')
   }
 
-  c.restore()
+
+  if (player.position.y > canvas.height) {
+    lives--;
+    document.getElementById("lives").textContent = "Vidas: " + lives;
+    if (lives <= 0) {
+      gameOver = true
+      const gameOverMsg = document.createElement("h1");
+      gameOverMsg.textContent = "Game Over";
+      gameOverMsg.style.color = "white"; 
+      document.getElementById("game-container").appendChild(gameOverMsg);
+      document.getElementById("pauseBtn").disabled = true;
+      document.getElementById("resumeBtn").disabled = true;
+    } else {
+      player.position.x = 175;
+      player.position.y = 350;
+      camera.position.x = 0;
+      camera.position.y = -backgroundImageHeight + scaledCanvas.height;
+    }
+  }  
+  
+  c.restore()  
 }
 
 const pauseBtn = document.getElementById('pauseBtn')
@@ -211,10 +275,8 @@ resumeBtn.addEventListener('click', () => {
 })
 
 restartBtn.addEventListener('click', () => {
-  window.location.reload()
+    window.location.reload()
 })
-
-
 
 animate()
 
@@ -228,7 +290,7 @@ window.addEventListener('keydown', (event) => {
       keys.a.pressed = true
       break
     case 'w':
-      if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -14
+      if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -13
       break
   }
 })
@@ -243,4 +305,29 @@ window.addEventListener('keyup', (event) => {
       break
   }
 })
+  
+
+// Detector de colisiones generales 
+// function detectCollision(player, block) {
+  // const playerTop = player.position.y
+  // const playerBottom = player.position.y + player.height
+  // const playerLeft = player.position.x
+  // const playerRight = player.position.x + player.width
+
+  // const blockTop = block.position.y
+  // const blockBottom = block.position.y + block.height
+  // const blockLeft = block.position.x
+ // const blockRight = block.position.x + block.width
+
+  // if (playerBottom >= blockTop &&
+     // playerTop <= blockBottom &&
+    //  playerRight >= blockLeft &&
+     // playerLeft <= blockRight) {
+    // Collision detected
+   // return true
+ // }
+
+  // No collision detected
+ // return false
+// }
 

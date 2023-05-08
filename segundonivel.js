@@ -64,23 +64,6 @@ platformCollisions2DLevel2.forEach((row, y) => {
 let lives = 3;
 let gameOver = false;
 
-function changeLevel() {
-  window.location.href = './juego2.html'
-}
-
-// Parte que no sirve
-Player.prototype.checkForCollisionWithBlock = function (block) {
-  if (
-    this.position.x + this.width > block.position.x &&
-    this.position.x < block.position.x + block.width &&
-    this.position.y + this.height > block.position.y &&
-    this.position.y < block.position.y + block.height &&
-    block.symbol === 575
-  ) {
-    changeLevel()
-  }
-}
-//
 
 const gravity = 1
 
@@ -89,6 +72,7 @@ const player = new Player({
     x: 175,
     y: 350,
   },  
+
   collisionBlocks,
   platformCollisionBlocks,
   imageSrc: './img/personaje/Idle.png',
@@ -151,7 +135,7 @@ const background = new Sprite({
     x: 0,
     y: 0,
   },
-  imageSrc: 'img/fondoantiguo.png',
+  imageSrc: 'img/segundonivel.png',
 })
 
 const backgroundImageHeight = 436
@@ -174,19 +158,31 @@ function animate() {
 
   c.fillStyle = 'white'
   c.fillRect(0, 0, canvas.width, canvas.height)
-
   c.save()
   c.scale(2.1, 2.1)
+
 
   c.translate(camera.position.x, camera.position.y)
   background.update()
 
-  // Parte que no sirve
+
   player.checkForHorizontalCanvasCollision()
-  collisionBlocks.forEach((block) => {
-    player.checkForCollisionWithBlock(block)
+
+  collisionBlocks.forEach(block => {
+    if (block.symbol === 575) {
+      if (detectCollision(player, block)) {
+        console.log('Collision detected with block', block)
+        window.location.href = './juego2.html'
+      }
+    } else {
+      if (detectCollision(player, block)) {
+        console.log('Collision detected with block', block)
+        // Aquí puedes agregar la lógica para manejar la colisión
+      }
+    }
   })
-  //
+  
+  
 
   player.update()
   player.velocity.x = 0
@@ -213,7 +209,6 @@ function animate() {
     if (player.lastDirection === 'right') player.switchSprite('Fall')
     else player.switchSprite('FallLeft')
   }
-
 
   if (player.position.y > canvas.height) {
     lives--;
@@ -287,6 +282,26 @@ window.addEventListener('keyup', (event) => {
   }
 })
 
+function detectCollision(player, block) {
+  const playerTop = player.position.y
+  const playerBottom = player.position.y + player.height
+  const playerLeft = player.position.x
+  const playerRight = player.position.x + player.width
 
+  const blockTop = block.position.y
+  const blockBottom = block.position.y + block.height
+  const blockLeft = block.position.x
+  const blockRight = block.position.x + block.width
 
+  if (playerBottom >= blockTop &&
+      playerTop <= blockBottom &&
+      playerRight >= blockLeft &&
+      playerLeft <= blockRight) {
+    // Collision detected
+    return true
+  }
+
+  // No collision detected
+  return false
+}
 
