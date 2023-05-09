@@ -1,10 +1,10 @@
 class Sprite {
   constructor({
-    position,
+    position, //un tuple (x,y)
     imageSrc,
     frameRate = 1,
     frameBuffer = 3,
-    scale = 1,
+    scale = 1, // Tamaño del fondo, no jugador 
   }) {
     this.position = position
     this.scale = scale

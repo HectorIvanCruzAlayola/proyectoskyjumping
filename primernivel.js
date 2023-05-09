@@ -17,9 +17,10 @@ for (let i = 0; i < floorCollisions.length; i += 65) {
 const collisionBlocks = []
 floorCollisions2D.forEach((row, y) => {
   row.forEach((symbol, x) => {
-    if (symbol === 574 || symbol === 428|| symbol === 325 || symbol === 324) {
+    if (symbol === 574 || symbol === 428|| symbol === 325 || symbol === 324) { // Suelo - Pinchos - Decoracion - Plataforma 
       collisionBlocks.push(
         new CollisionBlock({
+          symbol: symbol,
           position: {
             x: x * 16,
             y: y * 16,
@@ -27,9 +28,10 @@ floorCollisions2D.forEach((row, y) => {
         })
       )
     }
-    if (symbol === 732) {
+    if (symbol === 732) { // Puerta
       collisionBlocks.push(
         new CollisionBlock({
+          symbol: symbol,
           position: {
             x: x * 16,
             y: y * 16,
@@ -129,6 +131,9 @@ const keys = {
   a: {
     pressed: false,
   },
+  w: {
+    pressed: false,
+  },
 }
 
 const background = new Sprite({
@@ -168,45 +173,19 @@ function animate() {
 
 
   player.checkForHorizontalCanvasCollision()
-
-// Detector de colisiones de bloques con "symbol"
-const margin = 0
-floorCollisions2D.forEach((row, y) => {
-    row.forEach((symbol, x) => {
-      if (symbol === 324) {
-        const blockPosition = {
-          x: x * 16,
-          y: y * 16,
-        }
-        if (
-          player.position.x < blockPosition.x + 5 + margin &&
-          player.position.x + player.width > blockPosition.x - margin + 20 &&
-          player.position.y < blockPosition.y + 5 + margin &&
-          player.position.y + player.height > blockPosition.y 
-        ) {
-          // player has collided with block 732, handle collision here
-          console.log('Collision with block detected')
-          // window.location.href = "segundonivel.html"
-        }
-      }
-    })
-  })
   
 
-  // collisionBlocks.forEach(block => {
-    // if (block.symbol === 732) {
-      //  if (detectCollision(player, block)) {
-        //  console.log('Collision detected with block', block)
-       //  window.location.href = 'segundonivel.html'
-      // }
-   //  } else {
-     //  if (detectCollision(player, block)) {
-       //  console.log('Collision detected with block', block)
-        // Aquí puedes agregar la lógica para manejar la colisión
-     //  }
-   //  }
-  // })
-    
+  // Detectar colision con puerta 732
+   collisionBlocks.forEach(block => {
+    if (block.symbol === 732 && detectCollision(player, block)) {
+      console.log("Collision detected with door", block)
+      window.location.href = 'segundonivel.html'
+      return
+    }
+  })
+
+
+
   player.update()
   player.velocity.x = 0
   if (keys.d.pressed) {
@@ -279,8 +258,7 @@ restartBtn.addEventListener('click', () => {
 })
 
 animate()
-
-
+  
 window.addEventListener('keydown', (event) => {
   switch (event.key) {
     case 'd':
@@ -305,29 +283,12 @@ window.addEventListener('keyup', (event) => {
       break
   }
 })
-  
 
-// Detector de colisiones generales 
-// function detectCollision(player, block) {
-  // const playerTop = player.position.y
-  // const playerBottom = player.position.y + player.height
-  // const playerLeft = player.position.x
-  // const playerRight = player.position.x + player.width
 
-  // const blockTop = block.position.y
-  // const blockBottom = block.position.y + block.height
-  // const blockLeft = block.position.x
- // const blockRight = block.position.x + block.width
-
-  // if (playerBottom >= blockTop &&
-     // playerTop <= blockBottom &&
-    //  playerRight >= blockLeft &&
-     // playerLeft <= blockRight) {
-    // Collision detected
-   // return true
- // }
-
-  // No collision detected
- // return false
-// }
-
+// Detector nuevo de puerta renovada 
+function detectCollision(player, block) {
+  return collision({
+    object1: player.hitbox,
+    object2: block,
+  })
+}

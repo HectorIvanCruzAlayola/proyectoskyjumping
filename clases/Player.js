@@ -5,7 +5,7 @@ class Player extends Sprite {
     platformCollisionBlocks,
     imageSrc,
     frameRate,
-    scale = 0.5,
+    scale = 0.5, //Tamaño del jugador
     animations,
   }) {
 
@@ -18,14 +18,15 @@ class Player extends Sprite {
 
     this.collisionBlocks = collisionBlocks
     this.platformCollisionBlocks = platformCollisionBlocks
-    this.hitbox = {
-      position: {
-        x: this.position.x,
-        y: this.position.y,
-      },
-      width: 10,
-      height: 10,
-    }
+    //this.hitbox = {
+    //  position: {
+    //    x: this.position.x,
+    //    y: this.position.y,
+    //  },
+    //  width: 10,
+    //  height: 10,
+    //}
+    this.updateHitbox()
 
     this.animations = animations
     this.lastDirection = 'right'
