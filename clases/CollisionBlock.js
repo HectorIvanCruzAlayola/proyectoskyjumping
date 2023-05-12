@@ -1,5 +1,6 @@
 class CollisionBlock {
-  constructor({ symbol, position, height = 16 }) {
+  constructor({ symbol, block_type = "" ,position, height = 16 }) {
+    this.block_type = block_type
     this.symbol = symbol // Initialize the symbol to 0, so that it exists
     this.position = position
     this.width = 16
@@ -24,4 +25,5 @@ class CollisionBlock {
     this.draw()
   }
 }
+
 

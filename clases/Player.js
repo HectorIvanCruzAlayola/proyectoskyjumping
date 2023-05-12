@@ -7,9 +7,13 @@ class Player extends Sprite {
     frameRate,
     scale = 0.5, //Tamaño del jugador
     animations,
+    door = false,
+    pmuerte = false,
   }) {
 
     super({ imageSrc, frameRate, scale })
+    this.door = door
+    this.pmuerte = pmuerte
     this.position = position
     this.velocity = {
       x: 0,
@@ -182,6 +186,15 @@ class Player extends Sprite {
         if (this.velocity.x > 0) {
           this.velocity.x = 0
 
+          // Estas chocando horizontalmente
+          if (collisionBlock.block_type === "puerta") {
+            this.door = true
+          }
+
+          if (collisionBlock.block_type === "pinchos") {
+            this.pmuerte = true
+          }
+
           const offset =
             this.hitbox.position.x - this.position.x + this.hitbox.width
 
@@ -191,6 +204,16 @@ class Player extends Sprite {
 
         if (this.velocity.x < 0) {
           this.velocity.x = 0
+
+          // Estas chocando horizontalmente
+
+          if (collisionBlock.block_type === "puerta") {
+            this.door = true
+          }
+
+          if (collisionBlock.block_type === "pinchos") {
+            this.pmuerte = true
+          }
 
           const offset = this.hitbox.position.x - this.position.x
 
@@ -220,6 +243,16 @@ class Player extends Sprite {
         if (this.velocity.y > 0) {
           this.velocity.y = 0
 
+          // Estas chocando verticalmente
+
+          if (collisionBlock.block_type === "puerta") {
+            this.door = true
+          }
+
+          if (collisionBlock.block_type === "pinchos") {
+            this.pmuerte = true
+          }
+
           const offset =
             this.hitbox.position.y - this.position.y + this.hitbox.height
 
@@ -229,6 +262,16 @@ class Player extends Sprite {
 
         if (this.velocity.y < 0) {
           this.velocity.y = 0
+
+          // Estas chocando verticalmente
+
+          if (collisionBlock.block_type === "puerta") {
+            this.door = true
+          }
+
+          if (collisionBlock.block_type === "pinchos") {
+            this.pmuerte = true
+          }
 
           const offset = this.hitbox.position.y - this.position.y
 

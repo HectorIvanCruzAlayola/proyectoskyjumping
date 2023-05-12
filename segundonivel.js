@@ -1,3 +1,4 @@
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
@@ -9,6 +10,7 @@ const scaledCanvas = {
   height: canvas.height / 4.8,
 }
 
+
 const floorCollisions2DLevel2 = []
 for (let i = 0; i < floorCollisionsLevel2.length; i += 65) {
   floorCollisions2DLevel2.push(floorCollisionsLevel2.slice(i, i + 65))
@@ -17,9 +19,11 @@ for (let i = 0; i < floorCollisionsLevel2.length; i += 65) {
 const collisionBlocks = []
 floorCollisions2DLevel2.forEach((row, y) => {
   row.forEach((symbol, x) => {
-    if (symbol === 574 || symbol === 324) {
+    if (symbol === 11355) { // 
       collisionBlocks.push(
         new CollisionBlock({
+          symbol: symbol,
+          block_type: "puerta", 
           position: {
             x: x * 16,
             y: y * 16,
@@ -27,9 +31,22 @@ floorCollisions2DLevel2.forEach((row, y) => {
         })
       )
     }
-    if (symbol === 575) {
+    if (symbol === 11298) {
       collisionBlocks.push(
         new CollisionBlock({
+          symbol: symbol,
+          block_type: "pinchos", 
+          position: {
+            x: x * 16,
+            y: y * 16,
+          },
+        })
+      )
+    }
+    if (symbol === 11297) { // 
+      collisionBlocks.push(
+        new CollisionBlock({
+          symbol: symbol, 
           position: {
             x: x * 16,
             y: y * 16,
@@ -39,6 +56,7 @@ floorCollisions2DLevel2.forEach((row, y) => {
     }
   })
 })
+  
 
 const platformCollisions2DLevel2 = []
 for (let i = 0; i < platformCollisionsLevel2.length; i += 65) {
@@ -48,7 +66,7 @@ for (let i = 0; i < platformCollisionsLevel2.length; i += 65) {
 const platformCollisionBlocks = []
 platformCollisions2DLevel2.forEach((row, y) => {
   row.forEach((symbol, x) => {
-    if (symbol === 324) {
+    if (symbol === 11627) {
       platformCollisionBlocks.push(
         new CollisionBlock({
           position: {
@@ -61,7 +79,7 @@ platformCollisions2DLevel2.forEach((row, y) => {
   })
 })
 
-let lives = 3;
+let lives = 3
 let gameOver = false;
 
 
@@ -70,7 +88,7 @@ const gravity = 1
 const player = new Player({
   position: {
     x: 175,
-    y: 350,
+    y: 700,
   },  
 
   collisionBlocks,
@@ -128,6 +146,9 @@ const keys = {
   a: {
     pressed: false,
   },
+  w: {
+    pressed: false,
+  },
 }
 
 const background = new Sprite({
@@ -159,7 +180,7 @@ function animate() {
   c.fillStyle = 'white'
   c.fillRect(0, 0, canvas.width, canvas.height)
   c.save()
-  c.scale(2.1, 2.1)
+  // c.scale(2.1, 2.1)
 
 
   c.translate(camera.position.x, camera.position.y)
@@ -167,22 +188,23 @@ function animate() {
 
 
   player.checkForHorizontalCanvasCollision()
+  
 
-  collisionBlocks.forEach(block => {
-    if (block.symbol === 575) {
-      if (detectCollision(player, block)) {
-        console.log('Collision detected with block', block)
-        window.location.href = './juego2.html'
-      }
-    } else {
-      if (detectCollision(player, block)) {
-        console.log('Collision detected with block', block)
-        // Aquí puedes agregar la lógica para manejar la colisión
-      }
-    }
-  })
-  
-  
+  // Detectar colision con puerta 732
+  // collisionBlocks.forEach(block => {
+  //  if (block.symbol === 732 && detectCollision(player, block)) {
+  //    console.log("Collision detected with door", block)
+  //    window.location.href = 'segundonivel.html'
+  //    return
+  //  }
+  // })
+
+  if (player.door === true) {
+    localStorage.setItem('lives', lives);
+    window.location.href = 'segundonivel.html'
+    player.door = false
+  } 
+
 
   player.update()
   player.velocity.x = 0
@@ -210,9 +232,11 @@ function animate() {
     else player.switchSprite('FallLeft')
   }
 
-  if (player.position.y > canvas.height) {
+
+  if (player.position.y > canvas.height || player.pmuerte === true) {
     lives--;
     document.getElementById("lives").textContent = "Vidas: " + lives;
+    player.pmuerte = false
     if (lives <= 0) {
       gameOver = true
       const gameOverMsg = document.createElement("h1");
@@ -251,12 +275,11 @@ resumeBtn.addEventListener('click', () => {
 })
 
 restartBtn.addEventListener('click', () => {
-  window.location.reload()
+    window.location.reload()
 })
 
 animate()
-
-
+  
 window.addEventListener('keydown', (event) => {
   switch (event.key) {
     case 'd':
@@ -266,7 +289,7 @@ window.addEventListener('keydown', (event) => {
       keys.a.pressed = true
       break
     case 'w':
-      if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -14
+      if (player.velocity.y === 0) keys.w.pressed = player.velocity.y = -13
       break
   }
 })
@@ -282,26 +305,21 @@ window.addEventListener('keyup', (event) => {
   }
 })
 
-function detectCollision(player, block) {
-  const playerTop = player.position.y
-  const playerBottom = player.position.y + player.height
-  const playerLeft = player.position.x
-  const playerRight = player.position.x + player.width
 
-  const blockTop = block.position.y
-  const blockBottom = block.position.y + block.height
-  const blockLeft = block.position.x
-  const blockRight = block.position.x + block.width
+// Detector nuevo de puerta renovada 
+// function detectCollision(player, block) {
+//  return collision({
+//    object1: player.hitbox,
+//    object2: block,
+//  })
+// }
 
-  if (playerBottom >= blockTop &&
-      playerTop <= blockBottom &&
-      playerRight >= blockLeft &&
-      playerLeft <= blockRight) {
-    // Collision detected
-    return true
-  }
 
-  // No collision detected
-  return false
-}
+
+
+
+
+
+
+
 

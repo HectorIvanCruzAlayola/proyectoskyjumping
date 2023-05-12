@@ -17,7 +17,7 @@ for (let i = 0; i < floorCollisions.length; i += 65) {
 const collisionBlocks = []
 floorCollisions2D.forEach((row, y) => {
   row.forEach((symbol, x) => {
-    if (symbol === 574 || symbol === 428|| symbol === 325 || symbol === 324) { // Suelo - Pinchos - Decoracion - Plataforma 
+    if (symbol === 273 || symbol === 272 || symbol === 271) { // Suelo - Pinchos  - Decoracion - Plataforma 
       collisionBlocks.push(
         new CollisionBlock({
           symbol: symbol,
@@ -28,10 +28,23 @@ floorCollisions2D.forEach((row, y) => {
         })
       )
     }
-    if (symbol === 732) { // Puerta
+    if (symbol === 275) { // Puerta
       collisionBlocks.push(
         new CollisionBlock({
           symbol: symbol,
+          block_type: "puerta", 
+          position: {
+            x: x * 16,
+            y: y * 16,
+          },
+        })
+      )
+    }
+    if (symbol === 274) { // Pinchos
+      collisionBlocks.push(
+        new CollisionBlock({
+          symbol: symbol,
+          block_type: "pinchos", 
           position: {
             x: x * 16,
             y: y * 16,
@@ -64,7 +77,7 @@ platformCollisions2D.forEach((row, y) => {
   })
 })
 
-let lives = 3;
+let lives = 3
 let gameOver = false;
 
 
@@ -176,14 +189,19 @@ function animate() {
   
 
   // Detectar colision con puerta 732
-   collisionBlocks.forEach(block => {
-    if (block.symbol === 732 && detectCollision(player, block)) {
-      console.log("Collision detected with door", block)
-      window.location.href = 'segundonivel.html'
-      return
-    }
-  })
+  // collisionBlocks.forEach(block => {
+  //  if (block.symbol === 732 && detectCollision(player, block)) {
+  //    console.log("Collision detected with door", block)
+  //    window.location.href = 'segundonivel.html'
+  //    return
+  //  }
+  // })
 
+  if (player.door === true) {
+    localStorage.setItem('lives', lives);
+    window.location.href = 'segundonivel.html'
+    player.door = false
+  } 
 
 
   player.update()
@@ -213,9 +231,10 @@ function animate() {
   }
 
 
-  if (player.position.y > canvas.height) {
+  if (player.position.y > canvas.height || player.pmuerte === true) {
     lives--;
     document.getElementById("lives").textContent = "Vidas: " + lives;
+    player.pmuerte = false
     if (lives <= 0) {
       gameOver = true
       const gameOverMsg = document.createElement("h1");
@@ -286,9 +305,18 @@ window.addEventListener('keyup', (event) => {
 
 
 // Detector nuevo de puerta renovada 
-function detectCollision(player, block) {
-  return collision({
-    object1: player.hitbox,
-    object2: block,
-  })
-}
+// function detectCollision(player, block) {
+//  return collision({
+//    object1: player.hitbox,
+//    object2: block,
+//  })
+// }
+
+
+
+
+
+
+
+
+
