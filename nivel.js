@@ -1,6 +1,8 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
+const jumpSound = new Audio('sonidos/saltoaudio.m4a'); // cargar el archivo de sonido
+const gameOverSound = new Audio('sonidos/gameoverr.m4a'); 
 const pauseBtn = document.getElementById('pauseBtn')
 const resumeBtn = document.getElementById('resumeBtn')
 const restartBtn = document.getElementById('restartBtn')
@@ -21,7 +23,7 @@ const keys = {
 class Level {
     constructor(level_id, block_ids, scaling, spawn_coords, background_image_height) { //modif in current
         //       int       [int]      float   [float, float]          int
-
+        // momento esquizofrenico en ingles
         //lives = 3
         this.is_paused = false
         this.background_image_height = background_image_height
@@ -97,9 +99,6 @@ class Level {
         //}
         //let platformCollisionBlocks = []
 
-        console.log("Setting player's x to " + spawn_coords[0])
-        console.log("Setting player's y to " + spawn_coords[1])
-
         const gravity = 1
 
         this.player = new Player({
@@ -172,10 +171,12 @@ class Level {
 
         restartBtn.addEventListener('click', () => {
             window.location.reload()
+            localStorage.setItem('lives', 3)
         })
 
         restartJBtn.addEventListener('click', () => {
             window.location.href = "primernivel.html"
+            localStorage.setItem('lives', 3)
         })
 
         this.animate()
@@ -189,6 +190,8 @@ class Level {
                     keys.a.pressed = true
                     break
                 case 'w':
+                    console.log('reproduciendo sonido')
+                    jumpSound.play();
                     if (this.player.velocity.y === 0) keys.w.pressed = this.player.velocity.y = -14
                     break
             }
@@ -220,7 +223,7 @@ class Level {
 
     animate() {
         var lives = localStorage.getItem('lives')
-        if (lives <= 0) { //game over
+        if (lives <= 0) {//game over
             return
         }
 
@@ -285,6 +288,7 @@ class Level {
             this.player.pmuerte = false
             if (lives <= 0) { // muerte
                 localStorage.setItem("lives", 0)
+                gameOverSound.play()
                 const gameOverMsg = document.createElement("h1");
                 gameOverMsg.textContent = "Game Over";
                 gameOverMsg.style.color = "white"; 
