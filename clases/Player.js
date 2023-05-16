@@ -2,16 +2,17 @@ class Player extends Sprite {
   constructor({
     position,
     collisionBlocks,
-    platformCollisionBlocks,
     imageSrc,
     frameRate,
     scale = 0.5, //Tamaño del jugador
     animations,
     door = false,
     pmuerte = false,
+    gravity = 1,
   }) {
 
     super({ imageSrc, frameRate, scale })
+    this.gravity = gravity
     this.door = door
     this.pmuerte = pmuerte
     this.position = position
@@ -21,7 +22,6 @@ class Player extends Sprite {
     }
 
     this.collisionBlocks = collisionBlocks
-    this.platformCollisionBlocks = platformCollisionBlocks
     //this.hitbox = {
     //  position: {
     //    x: this.position.x,
@@ -226,7 +226,7 @@ class Player extends Sprite {
   }
   
   applyGravity() {
-    this.velocity.y += gravity
+    this.velocity.y += this.gravity
     this.position.y += this.velocity.y
   }
 
@@ -282,26 +282,26 @@ class Player extends Sprite {
       }
     }
 
-    // platform collision blocks
-    for (let i = 0; i < this.platformCollisionBlocks.length; i++) {
-      const platformCollisionBlock = this.platformCollisionBlocks[i]
+    //// platform collision blocks
+    //for (let i = 0; i < this.platformCollisionBlocks.length; i++) {
+    //  const platformCollisionBlock = this.platformCollisionBlocks[i]
 
-      if (
-        platformCollision({
-          object1: this.hitbox,
-          object2: platformCollisionBlock,
-        })
-      ) {
-        if (this.velocity.y > 0) {
-          this.velocity.y = 0
+    //  if (
+    //    platformCollision({
+    //      object1: this.hitbox,
+    //      object2: platformCollisionBlock,
+    //    })
+    //  ) {
+    //    if (this.velocity.y > 0) {
+    //      this.velocity.y = 0
 
-          const offset =
-            this.hitbox.position.y - this.position.y + this.hitbox.height
+    //      const offset =
+    //        this.hitbox.position.y - this.position.y + this.hitbox.height
 
-          this.position.y = platformCollisionBlock.position.y - offset - 0.01
-          break
-        }
-      }
-    }
+    //      this.position.y = platformCollisionBlock.position.y - offset - 0.01
+    //      break
+    //    }
+    //  }
+    //}
   }
 }
