@@ -20,7 +20,14 @@
       font-family: miFuente;
       font-size: 35px;
       text-align: center;
-      margin-top: 19.5rem;
+      margin-top: 16.8rem;
+    }
+
+  #reiniciarnivel {
+      font-family: miFuente;
+      font-size: 20px;
+      text-align: center;
+      margin-top: -3rem;
     }
 
     .textob {
@@ -83,6 +90,13 @@
     #restartJBtn:hover {
     background: #b5b4b4;
     }
+  
+    .corazon {
+      height: auto;
+      width: 35px;
+      margin-left: 80.5rem;
+      margin-top: -28.5px;
+    }
 
     
 
@@ -90,13 +104,13 @@
 <canvas></canvas>
 
 <div class="textob">
-  <button id="pauseBtn">Pausa</button>
-  <button id="resumeBtn" disabled>Reanudar</button>
   <button id="restartBtn">Reiniciar Nivel</button>
   <button id="restartJBtn">Reiniciar Juego</button>
 </div>
 <div id="lives">Vidas: 0</div>
+<img class="corazon" src="img/corazon.png">
 <div id="game-container"></div>
+<div id="reiniciarnivel"></div>
 <script src="utilidad.js"></script>
 <script src="./clases/CollisionBlock.js"></script>
 <script src="./clases/Sprite.js"></script>

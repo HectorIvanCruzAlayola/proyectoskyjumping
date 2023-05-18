@@ -3,10 +3,14 @@ const c = canvas.getContext('2d')
 
 const jumpSound = new Audio('sonidos/saltoaudio.m4a'); // cargar el archivo de sonido
 const gameOverSound = new Audio('sonidos/gameoverr.m4a'); 
+const doorSound = new Audio('sonidos/sonidopuerta.m4a'); 
+const deadSound = new Audio('sonidos/sonidodemuerte.m4a'); 
+
 const pauseBtn = document.getElementById('pauseBtn')
 const resumeBtn = document.getElementById('resumeBtn')
 const restartBtn = document.getElementById('restartBtn')
 const restartJBtn = document.getElementById('restartJBtn')
+  
 
 const keys = {
     d: {
@@ -18,6 +22,10 @@ const keys = {
     w: {
         pressed: false,
     },
+
+    e: {
+        pressed: false,
+    }
 }
 
 class Level {
@@ -155,23 +163,24 @@ class Level {
             },
         })
 
+        window.addEventListener('keydown', (event) => {
+            switch (event.key) {     
+              case 'e':
+                if (this.is_paused) {
+                this.is_paused = false 
+                this.animate()
+                keys.e.disabled = true
+                }
+                break;
+            }
+          });
 
-        pauseBtn.addEventListener('click', () => {
-            this.is_paused = true
-            pauseBtn.disabled = true
-            resumeBtn.disabled = false
-        })
 
-        resumeBtn.addEventListener('click', () => {
-            this.is_paused = false
-            this.animate()
-            pauseBtn.disabled = false
-            resumeBtn.disabled = true
-        })
 
         restartBtn.addEventListener('click', () => {
             window.location.reload()
             localStorage.setItem('lives', 3)
+            restartBtn.disabled = false
         })
 
         restartJBtn.addEventListener('click', () => {
@@ -187,13 +196,13 @@ class Level {
                     keys.d.pressed = true
                     break
                 case 'a':
-                    keys.a.pressed = true
+                   keys.a.pressed = true
                     break
                 case 'w':
-                    console.log('reproduciendo sonido')
-                    jumpSound.play();
-                    if (this.player.velocity.y === 0) keys.w.pressed = this.player.velocity.y = -14
-                    break
+                    if (this.player.velocity.y === 0) { keys.w.pressed = this.player.velocity.y = -14  
+                    jumpSound.currentTime = 0
+                    jumpSound.play()
+                }
             }
         })
 
@@ -208,9 +217,6 @@ class Level {
                     break
             }
         })
-
-
-
     }
 
 
@@ -243,6 +249,7 @@ class Level {
         this.player.checkForHorizontalCanvasCollision()
         
         if (this.player.door === true) {
+            doorSound.play()
             localStorage.setItem('lives', lives)
             window.location.href = levelNames[this.level_id + 1] + '.html'
         } 
@@ -283,18 +290,36 @@ class Level {
 
 
         if (this.player.position.y > canvas.height || this.player.pmuerte === true) {
+            deadSound.currentTime = 0
+            deadSound.play()
             lives--;
             document.getElementById("lives").textContent = "Vidas: " + lives;
             this.player.pmuerte = false
             if (lives <= 0) { // muerte
+                restartBtn.disabled = true
                 localStorage.setItem("lives", 0)
                 gameOverSound.play()
                 const gameOverMsg = document.createElement("h1");
                 gameOverMsg.textContent = "Game Over";
                 gameOverMsg.style.color = "white"; 
                 document.getElementById("game-container").appendChild(gameOverMsg);
-                document.getElementById("pauseBtn").disabled = true;
-                document.getElementById("resumeBtn").disabled = true;
+            
+                const restartMsg = document.createElement("h2");
+                restartMsg.textContent = "Presiona espacio para reiniciar";
+                restartMsg.style.color = "white"; 
+                document.getElementById("reiniciarnivel").appendChild(restartMsg);
+
+                window.addEventListener('keydown', (event) => {
+                    switch (event.key) {     
+                      case ' ':
+                        if (lives <= 0) {
+                            window.location.href = "primernivel.html"
+                            localStorage.setItem('lives', 3)
+                        }
+                        break;
+                    }
+                  });
+
             } else {
                 this.player.position.x = this.spawn_coords[0];
                 this.player.position.y = this.spawn_coords[1];
@@ -303,6 +328,17 @@ class Level {
             }
         }  
         
+        window.addEventListener('keydown', (event) => {
+            switch (event.key) {     
+              case 'Escape':
+                this.is_paused = true
+                pauseBtn.disabled = true
+                resumeBtn.disabled = false
+                break;
+            }
+          });
+
+
         localStorage.setItem('lives', lives)
         c.restore()
     }
