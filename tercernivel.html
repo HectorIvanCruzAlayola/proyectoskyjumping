@@ -1,0 +1,126 @@
+<style>
+    body {
+      background-color: black;
+    }
+  
+    @font-face {
+      font-family: miFuente;
+      src: url(fuentes/Retro\ Gaming.ttf);
+    }
+  
+    #lives{
+      font-family: miFuente;
+      color: white;
+      font-size: 18px;
+      margin-left: 82.7rem;
+      margin-top: -49rem;
+    }
+    
+    #game-container {
+        font-family: miFuente;
+        font-size: 35px;
+        text-align: center;
+        margin-top: 16.8rem;
+      }
+  
+    #reiniciarnivel {
+        font-family: miFuente;
+        font-size: 20px;
+        text-align: center;
+        margin-top: -3rem;
+      }
+  
+      .textob {
+        display: flex;
+      }
+  
+      #pauseBtn {
+        text-align: center;
+        justify-content: center;
+        background-color: rgb(219, 217, 217);
+        margin-right: 7px;
+        margin-top: 10px;
+        font-family: miFuente;
+        border-radius: 4px;
+        font-size: 18px;
+        transition: 0.2s;
+      }
+  
+      #pauseBtn:hover {
+      background: #b5b4b4;
+      }
+  
+      #resumeBtn {
+        background-color: rgb(219, 217, 217);
+        margin-top: 10px;
+        margin-right: 7px;
+        font-family: miFuente;
+        border-radius: 4px;
+        font-size: 18px;
+        transition: 0.2s;
+      }
+  
+      #resumeBtn:hover {
+      background: #b5b4b4;
+      }
+  
+      #restartBtn {
+        background-color: rgb(219, 217, 217);
+        margin-top: 10px;
+        margin-right: 7px;
+        font-family: miFuente;
+        border-radius: 4px;
+        font-size: 18px;
+        transition: 0.2s;
+      }
+  
+      #restartBtn:hover {
+      background: #b5b4b4;
+      }
+  
+      #restartJBtn {
+        background-color: rgb(219, 217, 217);
+        margin-top: 10px;
+        font-family: miFuente;
+        border-radius: 4px;
+        font-size: 18px;
+        transition: 0.2s;
+      }
+  
+      #restartJBtn:hover {
+      background: #b5b4b4;
+      }
+    
+      .corazon {
+        height: auto;
+        width: 35px;
+        margin-left: 80.5rem;
+        margin-top: -28.5px;
+      }
+  
+      
+  
+  </style>
+  <canvas></canvas>
+  
+  <div class="textob">
+    <button id="restartBtn">Reiniciar Nivel</button>
+    <button id="restartJBtn">Reiniciar Juego</button>
+  </div>
+  <div id="lives">Vidas: 0</div>
+  <img class="corazon" src="img/corazon.png">
+  <div id="game-container"></div>
+  <div id="reiniciarnivel"></div>
+  <script src="utilidad.js"></script>
+  <script src="./clases/CollisionBlock.js"></script>
+  <script src="./clases/Sprite.js"></script>
+  <script src="./clases/Player.js"></script>
+  <script src="./informacioncolisiones/collisiones.js"></script>
+  <script src="nivel.js"></script>
+  <script src="tercernivel.js"></script>
+  
+  
+  
+  
+  
+  

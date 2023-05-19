@@ -5,6 +5,7 @@ const jumpSound = new Audio('sonidos/saltoaudio.m4a'); // cargar el archivo de s
 const gameOverSound = new Audio('sonidos/gameoverr.m4a'); 
 const doorSound = new Audio('sonidos/sonidopuerta.m4a'); 
 const deadSound = new Audio('sonidos/sonidodemuerte.m4a'); 
+const stopSound = new Audio('sonidos/sonidopausan.m4a'); 
 
 const pauseBtn = document.getElementById('pauseBtn')
 const resumeBtn = document.getElementById('resumeBtn')
@@ -100,12 +101,6 @@ class Level {
             })
         })
 
-        //let platformCollisions2D = []
-        //let curPlatformCollisions = platformCollisions[level_id] //agarrar information para este nivel
-        //for (let i = 0; i < curPlatformCollisions.length; i += 65) {
-        //    platformCollisions2D.push(curPlatformCollisions.slice(i, i + 65))
-        //}
-        //let platformCollisionBlocks = []
 
         const gravity = 1
 
@@ -123,7 +118,7 @@ class Level {
                 Idle: {
                     imageSrc: './img/personaje/Idle.png',
                     frameRate: 8,
-                    frameBuffer: 5,
+                    frameBuffer: 5
                 },
                 Run: {
                     imageSrc: './img/personaje/Run.png',
@@ -167,6 +162,7 @@ class Level {
             switch (event.key) {     
               case 'e':
                 if (this.is_paused) {
+                stopSound.play()
                 this.is_paused = false 
                 this.animate()
                 keys.e.disabled = true
@@ -175,7 +171,16 @@ class Level {
             }
           });
 
-
+                  
+        window.addEventListener('keydown', (event) => {
+            switch (event.key) {     
+              case 'Escape': 
+                this.is_paused = true 
+                pauseBtn.disabled = true
+                resumeBtn.disabled = false
+                break;
+            }
+          });
 
         restartBtn.addEventListener('click', () => {
             window.location.reload()
@@ -327,23 +332,16 @@ class Level {
                 this.camera.position.y = -this.background_image_height + this.scaledCanvas.height;
             }
         }  
-        
-        window.addEventListener('keydown', (event) => {
-            switch (event.key) {     
-              case 'Escape':
-                this.is_paused = true
-                pauseBtn.disabled = true
-                resumeBtn.disabled = false
-                break;
-            }
-          });
 
+        
 
         localStorage.setItem('lives', lives)
         c.restore()
     }
 
 }
+
+
 
 
 

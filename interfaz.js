@@ -1,8 +1,14 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-const backgroundMusic = new Audio('sonidos/musicainterfaz.mp3');
 const startBtn = document.getElementById('startBtn')
+const backgroundSound = new Audio('sonidos/musicainterfaz.mp3');
+
+
+backgroundSound.addEventListener('ended', function() {
+  this.currentTime = 0; 
+  this.play();
+});
 
 canvas.width = 1420
 canvas.height = 750
@@ -17,8 +23,6 @@ const background = new Sprite({
 })
 
 const backgroundImageHeight = 436
-backgroundMusic.play()
-
 
 
 window.addEventListener('keydown', (event) => {
@@ -47,9 +51,15 @@ function animate() {
   } else {
     startBtn.style.visibility = 'visible' // Muestra el texto
   }
+
 }
 
+
 animate()
+backgroundSound.play()
+
+
+
 
   
 
