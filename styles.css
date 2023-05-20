@@ -22,7 +22,7 @@
 }
 
 .banner2 {
-    background: #886fee;
+    background-image: url(fondoproyecto.jpg);
     width: 100%;
     height: 100vh;
     background-size: cover;
@@ -719,7 +719,14 @@ tr td {
     font-weight: 200;
 }
 
+
+@font-face {
+    font-family: miFuente;
+    src: url(fuentes/Retro\ Gaming.ttf);
+  }
+
 .maquetado {
+    font-family: miFuente;
     width: 100%;
     position: absolute;
     top: 19%;
@@ -728,30 +735,34 @@ tr td {
 }
 
 .maquetado h1{
+    font-family: miFuente;
     font-size: 43px;
     text-align: center;
     color: white;
 }
 
 .maquetado h2 {
-    font-size: 30px;
+    font-family: miFuente;
+    font-size: 25px;
     text-align: right;
-    margin-top: 15vh;
-    margin-right: 40vh;
+    margin-top: 14vh;
+    margin-right: 53vh;
     color: white;
 }
 
 .maquetado p {
-    font-size: 15.5px;
+    font-family: miFuente;
+    font-size: 14.7px;
     font-weight: 300;
     text-align: left;
-    margin-top: 10px;
-    margin-left: 916px;
+    margin-top: 15px;
+    margin-left: 838px;
     color: white;
-    line-height: 30px;
+    line-height: 25px;
 }
 
 .boceto {
+    margin-left: -2.5rem;
     width: 100%;
     position: absolute;
     top: 34%; 

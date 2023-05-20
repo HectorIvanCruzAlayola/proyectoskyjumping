@@ -19,7 +19,7 @@ const background = new Sprite({
     x: 0,
     y: 0,
   },
-  imageSrc: 'img/prueba.png',
+  imageSrc: 'img/interfaz1.jpg',
 })
 
 const backgroundImageHeight = 436
@@ -40,7 +40,6 @@ function animate() {
   c.fillStyle = 'white'
   c.fillRect(0, 0, canvas.width, canvas.height)
   c.save()
-  c.scale(2.1, 2.1)
 
   background.update()
   
