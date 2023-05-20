@@ -4,7 +4,7 @@ const block_ids = { //if not any of these, then "suelo" // add strings to the co
 }
 
 const scaling = 4.8 // modify per level xd 
-const player_coords = [175, 350] 
+const player_coords = [175, 550] 
 const background_image_height = 436
 
 
