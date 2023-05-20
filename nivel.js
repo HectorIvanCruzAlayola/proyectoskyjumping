@@ -11,6 +11,7 @@ const pauseBtn = document.getElementById('pauseBtn')
 const resumeBtn = document.getElementById('resumeBtn')
 const restartBtn = document.getElementById('restartBtn')
 const restartJBtn = document.getElementById('restartJBtn')
+const inicioBtn = document.getElementById('inicioBtn')
   
 
 const keys = {
@@ -191,6 +192,10 @@ class Level {
         restartJBtn.addEventListener('click', () => {
             window.location.href = "primernivel.html"
             localStorage.setItem('lives', 3)
+        })
+
+        inicioBtn.addEventListener('click', () => {
+            window.location.href = "index.html"
         })
 
         this.animate()
