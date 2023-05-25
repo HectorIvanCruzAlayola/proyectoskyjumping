@@ -3,7 +3,6 @@ const c = canvas.getContext('2d')
 
 const jumpSound = new Audio('sonidos/saltoaudio.m4a'); // cargar el archivo de sonido
 const gameOverSound = new Audio('sonidos/gameoverr.m4a'); 
-const doorSound = new Audio('sonidos/sonidopuerta.m4a'); 
 const deadSound = new Audio('sonidos/sonidodemuerte.m4a'); 
 const stopSound = new Audio('sonidos/sonidopausan.m4a'); 
 
@@ -259,7 +258,6 @@ class Level {
         this.player.checkForHorizontalCanvasCollision()
         
         if (this.player.door === true) {
-            doorSound.play()
             localStorage.setItem('lives', lives)
             window.location.href = levelNames[this.level_id + 1] + '.html'
         } 
