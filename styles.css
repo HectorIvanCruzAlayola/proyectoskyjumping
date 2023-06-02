@@ -303,7 +303,7 @@ img {
 }
 
 .parrafo a.botoncard {
-    background: #343435;
+    background: #6a6a6a;
     color:#f6f4ff;
 }
 
@@ -746,7 +746,7 @@ tr td {
     font-size: 25px;
     text-align: right;
     margin-top: 14vh;
-    margin-right: 53vh;
+    margin-right: 51vh;
     color: white;
 }
 
